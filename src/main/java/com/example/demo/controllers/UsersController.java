@@ -1,6 +1,6 @@
 package com.example.demo.controllers;
 
-// import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -37,6 +37,11 @@ public class UsersController {
         return "users/showAll";
     }
     
+    @GetMapping("/")
+    public RedirectView process(){
+        return new RedirectView("login");
+    }
+
     @PostMapping("/users/add")
     public String addUser(@RequestParam Map<String, String> newuser, HttpServletResponse response) {
         System.out.println("ADD user");
@@ -84,56 +89,61 @@ public class UsersController {
         }
     }
 
-    @PatchMapping("/users/update")
-    public String updateUser(@RequestParam Map<String, String> newuser, HttpServletResponse response) {
-        System.out.println("UPDATE user");
-        String newName = newuser.get("name");
-        String newPwd = newuser.get("password");
-        int newSize = Integer.parseInt(newuser.get("size"));
-
-        if (newName.length() == 0) {
-            System.out.println("Error: username contained no characters");
-            throw new RuntimeException("Error: name is undefined");
-        }
-
-        // Assuming you have logic to find and update a specific user
-        User user = userRepo.findByUsername(newName); // Adjust this based on your repository method
-        if (user != null) {
-            // Update user information
-            user.setPassword(newPwd);
-            user.setSize(newSize);
-
-            // Save the updated user
-            userRepo.save(user);
-
-            response.setStatus(200);
-            return "users/updatedUser";
-        } else {
-            // Handle the case where the user is not found
-            System.out.println("Error: User not found");
-            response.setStatus(404);
-            return "users/userNotFound";
-        }
+    @GetMapping("/logout")
+    public String destroySession(HttpServletRequest request){
+        request.getSession().invalidate();
+        return "/users/login";
     }
+    // @PatchMapping("/users/update")
+    // public String updateUser(@RequestParam Map<String, String> newuser, HttpServletResponse response) {
+    //     System.out.println("UPDATE user");
+    //     String newName = newuser.get("name");
+    //     String newPwd = newuser.get("password");
+    //     int newSize = Integer.parseInt(newuser.get("size"));
 
-    @DeleteMapping("/users/delete")
-    public String deleteUser(@RequestParam String username, HttpServletResponse response) {
-        System.out.println("DELETE user");
+    //     if (newName.length() == 0) {
+    //         System.out.println("Error: username contained no characters");
+    //         throw new RuntimeException("Error: name is undefined");
+    //     }
 
-        // Assuming you have logic to find and delete a specific user
-        User user = userRepo.findByUsername(username); // Adjust this based on your repository method
-        if (user != null) {
-            // Delete the user from the database
-            userRepo.delete(user);
+    //     // Assuming you have logic to find and update a specific user
+    //     User user = userRepo.findByUsername(newName); // Adjust this based on your repository method
+    //     if (user != null) {
+    //         // Update user information
+    //         user.setPassword(newPwd);
+    //         user.setSize(newSize);
 
-            response.setStatus(200);
-            return "users/deletedUser";
-        } else {
-            // Handle the case where the user is not found
-            System.out.println("Error: User not found");
-            response.setStatus(404);
-            return "users/userNotFound";
-        }
-    }
+    //         // Save the updated user
+    //         userRepo.save(user);
+
+    //         response.setStatus(200);
+    //         return "users/updatedUser";
+    //     } else {
+    //         // Handle the case where the user is not found
+    //         System.out.println("Error: User not found");
+    //         response.setStatus(404);
+    //         return "users/userNotFound";
+    //     }
+    // }
+
+    // @DeleteMapping("/users/delete")
+    // public String deleteUser(@RequestParam String username, HttpServletResponse response) {
+    //     System.out.println("DELETE user");
+
+    //     // Assuming you have logic to find and delete a specific user
+    //     User user = userRepo.findByUsername(username); // Adjust this based on your repository method
+    //     if (user != null) {
+    //         // Delete the user from the database
+    //         userRepo.delete(user);
+
+    //         response.setStatus(200);
+    //         return "users/deletedUser";
+    //     } else {
+    //         // Handle the case where the user is not found
+    //         System.out.println("Error: User not found");
+    //         response.setStatus(404);
+    //         return "users/userNotFound";
+    //     }
+    // }
 
 }
