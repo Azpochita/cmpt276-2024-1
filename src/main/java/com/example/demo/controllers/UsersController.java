@@ -40,16 +40,16 @@ public class UsersController {
         return "users/showAll";
     }
     
-    // @PostMapping("/users/add")
-    // public String addUser(@RequestParam Map<String, String> newuser, HttpServletResponse response) {
-    //     System.out.println("ADD user");
-    //     String newName = newuser.get("name");
-    //     String newPwd = newuser.get("password");
-    //     int newSize = Integer.parseInt(newuser.get("size"));
-    //     userRepo.save(new User(newName,newPwd,newSize));
-    //     response.setStatus(sc:201);
-    //     return "users/addedUser";
-    // }
+    @PostMapping("/users/add")
+    public String addUser(@RequestParam Map<String, String> newuser, HttpServletResponse response) {
+        System.out.println("ADD user");
+        String newName = newuser.get("name");
+        String newPwd = newuser.get("password");
+        int newSize = Integer.parseInt(newuser.get("size"));
+        usersRepository.save(new User(newName,newPwd,newSize));
+        response.setStatus(201);
+        return "users/addedUser";
+    }
     // @GetMapping("/login")
     // public String getLogin(Model model, HttpServletRequest request, HttpSession session) {
     //     return new String();
