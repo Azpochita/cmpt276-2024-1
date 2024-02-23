@@ -12,7 +12,7 @@ import com.example.demo.models.UserRepository;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-// import scala.collection.concurrent.Map;
+import java.util.*;
 
 import com.example.demo.models.User;
 
@@ -30,12 +30,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class UsersController {
     
     @Autowired
-    private UserRepository usersRepository;
+    private UserRepository userRepo;
 
     @GetMapping("/users/view")
     public String getAllUsers(Model model) {
         System.out.println("Hello from all users");
-        List<User> users = usersRepository.findAll(); // db
+        List<User> users = userRepo.findAll(); // db
         model.addAttribute("us", users);
         return "users/showAll";
     }
@@ -46,7 +46,7 @@ public class UsersController {
         String newName = newuser.get("name");
         String newPwd = newuser.get("password");
         int newSize = Integer.parseInt(newuser.get("size"));
-        usersRepository.save(new User(newName,newPwd,newSize));
+        userRepo.save(new User(newName,newPwd,newSize));
         response.setStatus(201);
         return "users/addedUser";
     }
