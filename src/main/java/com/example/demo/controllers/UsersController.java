@@ -1,8 +1,5 @@
 package com.example.demo.controllers;
 
-import java.util.ArrayList;
-import java.util.List;
-
 // import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,13 +43,97 @@ public class UsersController {
         String newName = newuser.get("name");
         String newPwd = newuser.get("password");
         int newSize = Integer.parseInt(newuser.get("size"));
+
+        if (newName.length() == 0) {
+            System.out.println("Error username contained no characters");
+            throw Error("Error: name is undefined");
+        }
+
         userRepo.save(new User(newName,newPwd,newSize));
         response.setStatus(201);
         return "users/addedUser";
     }
-    // @GetMapping("/login")
-    // public String getLogin(Model model, HttpServletRequest request, HttpSession session) {
-    //     return new String();
-    // }
-    
+
+    @GetMapping("/login")
+    public String getLogin(Model model, HttpServletRequest request, HttpSession session) {
+        User user = (User) session.getAttribute("session_user");
+        if (user = null){
+            return "users/login";
+        }
+        else {
+            model.addAttribute("user", user);
+            return "users/protected";
+        }
+    }
+
+    @PostMapping("/login")
+    public String login(@RequestParam Map<String,String> formdata, Model model, HttpServletRequest request, HttpSession session){ 
+        // processing login
+        String name = formData.get("name");
+        String pwd = formdata.get("password");
+        List<User> userList = userRepo.findByNameAndPassword(name, pwd);
+        if (userlist.isEmpty()){
+            return "users/login";
+        }
+        else {
+            //success
+            User user = userlist.get(0);
+            request.getSession().setAttribute("session_user", user);
+            model.addAttribute("user", user);
+            return "users/protected";
+        }
+    }
+
+    @PatchMapping("/users/update")
+    public String updateUser(@RequestParam Map<String, String> newuser, HttpServletResponse response) {
+        System.out.println("UPDATE user");
+        String newName = newuser.get("name");
+        String newPwd = newuser.get("password");
+        int newSize = Integer.parseInt(newuser.get("size"));
+
+        if (newName.length() == 0) {
+            System.out.println("Error: username contained no characters");
+            throw new RuntimeException("Error: name is undefined");
+        }
+
+        // Assuming you have logic to find and update a specific user
+        User user = userRepo.findByUsername(newName); // Adjust this based on your repository method
+        if (user != null) {
+            // Update user information
+            user.setPassword(newPwd);
+            user.setSize(newSize);
+
+            // Save the updated user
+            userRepo.save(user);
+
+            response.setStatus(200);
+            return "users/updatedUser";
+        } else {
+            // Handle the case where the user is not found
+            System.out.println("Error: User not found");
+            response.setStatus(404);
+            return "users/userNotFound";
+        }
+    }
+
+    @DeleteMapping("/users/delete")
+    public String deleteUser(@RequestParam String username, HttpServletResponse response) {
+        System.out.println("DELETE user");
+
+        // Assuming you have logic to find and delete a specific user
+        User user = userRepo.findByUsername(username); // Adjust this based on your repository method
+        if (user != null) {
+            // Delete the user from the database
+            userRepo.delete(user);
+
+            response.setStatus(200);
+            return "users/deletedUser";
+        } else {
+            // Handle the case where the user is not found
+            System.out.println("Error: User not found");
+            response.setStatus(404);
+            return "users/userNotFound";
+        }
+    }
+
 }
