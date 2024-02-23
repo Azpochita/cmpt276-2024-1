@@ -3,7 +3,7 @@ package com.example.demo.controllers;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
+// import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,7 +12,7 @@ import com.example.demo.models.UserRepository;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import scala.collection.concurrent.Map;
+// import scala.collection.concurrent.Map;
 
 import com.example.demo.models.User;
 
@@ -50,9 +50,9 @@ public class UsersController {
     //     response.setStatus(sc:201);
     //     return "users/addedUser";
     // }
-    @GetMapping("/login")
-    public String getLogin(Model model, HttpServletRequest request, HttpSession session) {
-        return new String();
-    }
+    // @GetMapping("/login")
+    // public String getLogin(Model model, HttpServletRequest request, HttpSession session) {
+    //     return new String();
+    // }
     
 }
