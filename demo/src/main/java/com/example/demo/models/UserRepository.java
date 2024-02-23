@@ -4,9 +4,9 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface UserRepository extends JpaRepository<Users, Integer>{
-    List<Users> findByAge(int age);
-    List<Users> findByName(String name);
-    List<Users> findByNameAndPassword(String name, String password);
+public interface UserRepository extends JpaRepository<User, Integer>{
+    List<User> findByAge(int age);
+    List<User> findByName(String name);
+    List<User> findByNameAndPassword(String name, String password);
 }
 
