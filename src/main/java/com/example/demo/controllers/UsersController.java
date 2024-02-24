@@ -10,6 +10,7 @@ import com.example.demo.models.UserRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.*;
+import java.lang.*;
 
 import com.example.demo.models.User;
 
@@ -37,13 +38,13 @@ public class UsersController {
         return "users/showAll";
     }
     
-    @GetMapping("/")
-    public RedirectView process(){
-        return new RedirectView("login");
-    }
+    // @GetMapping("/")
+    // public RedirectView process(){
+    //     return new RedirectView("login");
+    // }
 
     @PostMapping("/users/add")
-    public String addUser(@RequestParam Map<String, String> newuser, HttpServletResponse response) {
+    public String addUser(Map<String, String> newuser, HttpServletResponse response) {
         System.out.println("ADD user");
         String newName = newuser.get("name");
         String newPwd = newuser.get("password");
@@ -51,7 +52,7 @@ public class UsersController {
 
         if (newName.length() == 0) {
             System.out.println("Error username contained no characters");
-            throw Error("Error: name is undefined");
+            throw new Error("Error: name is undefined");
         }
 
         userRepo.save(new User(newName,newPwd,newSize));
@@ -62,7 +63,7 @@ public class UsersController {
     @GetMapping("/login")
     public String getLogin(Model model, HttpServletRequest request, HttpSession session) {
         User user = (User) session.getAttribute("session_user");
-        if (user = null){
+        if (user == null){
             return "users/login";
         }
         else {
@@ -72,17 +73,17 @@ public class UsersController {
     }
 
     @PostMapping("/login")
-    public String login(@RequestParam Map<String,String> formdata, Model model, HttpServletRequest request, HttpSession session){ 
+    public String login(@RequestParam Map<String,String> formData, Model model, HttpServletRequest request, HttpSession session) {
         // processing login
         String name = formData.get("name");
-        String pwd = formdata.get("password");
+        String pwd = formData.get("password");
         List<User> userList = userRepo.findByNameAndPassword(name, pwd);
-        if (userlist.isEmpty()){
+        if (userList.isEmpty()){
             return "users/login";
         }
         else {
             //success
-            User user = userlist.get(0);
+            User user = userList.get(0);
             request.getSession().setAttribute("session_user", user);
             model.addAttribute("user", user);
             return "users/protected";
