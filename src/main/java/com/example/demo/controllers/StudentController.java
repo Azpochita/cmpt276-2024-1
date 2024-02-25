@@ -121,7 +121,7 @@ public class StudentController {
     @GetMapping("/students/delete/{id}")
     public String deleteStudent(@PathVariable Long id) {
         studentRepo.deleteById(id);
-        return "redirect:/students";
+        return "redirect:/students/showAll";
     }
 
 }
