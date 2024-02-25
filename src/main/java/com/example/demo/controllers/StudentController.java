@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 
 import com.example.demo.models.StudentRepository;
 
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.*;
@@ -41,7 +43,7 @@ public class StudentController {
 
     @GetMapping("/students/add")
     public String showAddForm(Model model) {
-        model.addAttribute("student", new Student());
+        model.addAttribute("student", new Student("name", "password", "size", "hairColor", 0));
         return "students/addForm";
     }
 
@@ -57,14 +59,14 @@ public class StudentController {
             throw new Error("Error: name is undefined");
         }
 
-        studentRepo.save(new Student(newName,newPwd,newSize));
+        studentRepo.save(new Student("name", "password", "size", "hairColor", 0));
         response.setStatus(201);
         
         return "students/addForm";
     }
 
     @GetMapping("/students/edit/{id}")
-    public String showEditForm(@PathVariable Long id, Model model) {
+    public String showEditForm(@PathVariable Integer id, Model model) {
         Student student = studentRepo.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid student id: " + id));
 
@@ -73,7 +75,7 @@ public class StudentController {
     }
 
     @PostMapping("/students/edit/{id}")
-    public String editStudent(@PathVariable Long id, @ModelAttribute Student updatedStudent) {
+    public String editStudent(@PathVariable Integer id, @ModelAttribute Student updatedStudent) {
         Student student = studentRepo.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid student id: " + id));
 
@@ -81,45 +83,15 @@ public class StudentController {
         student.setName(updatedStudent.getName());
         student.setWeight(updatedStudent.getWeight());
         student.setHeight(updatedStudent.getHeight());
-        student.setHairColor(updatedStudent.getHairColor());
+        student.sethairColor(updatedStudent.gethairColor());
         student.setGpa(updatedStudent.getGpa());
 
         studentRepo.save(student);
         return "redirect:/students/showAll";
     }
 
-    @GetMapping("/login")
-    public String getLogin(Model model, HttpServletRequest request, HttpSession session) {
-        Student student = (Student) session.getAttribute("session_student");
-        if (student == null){
-            return "students/login";
-        }
-        else {
-            model.addAttribute("student", student);
-            return "students/protected";
-        }
-    }
-
-    @PostMapping("/login")
-    public String login(@RequestParam Map<String,String> formData, Model model, HttpServletRequest request, HttpSession session) {
-        // processing login
-        String name = formData.get("name");
-        String pwd = formData.get("password");
-        List<Student> studentList = studentRepo.findByNameAndPassword(name, pwd);
-        if (studentList.isEmpty()){
-            return "students/login";
-        }
-        else {
-            //success
-            Student student = studentList.get(0);
-            request.getSession().setAttribute("session_student", student);
-            model.addAttribute("student", student);
-            return "students/protected";
-        }
-    }
-
     @GetMapping("/students/delete/{id}")
-    public String deleteStudent(@PathVariable Long id) {
+    public String deleteStudent(@PathVariable Integer id) {
         studentRepo.deleteById(id);
         return "redirect:/students/showAll";
     }
