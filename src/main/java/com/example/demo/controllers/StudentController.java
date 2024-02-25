@@ -85,7 +85,7 @@ public class StudentController {
         student.setGpa(updatedStudent.getGpa());
 
         studentRepo.save(student);
-        return "redirect:/students";
+        return "redirect:/students/showAll";
     }
 
     @GetMapping("/login")
