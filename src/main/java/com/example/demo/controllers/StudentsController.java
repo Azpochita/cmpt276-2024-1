@@ -5,7 +5,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
-import com.example.demo.models.StudentRepository;
+import com.example.demo.models.StudentsRepository;
 
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -31,7 +31,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class StudentsController {
     
     @Autowired
-    private StudentRepository studentRepo;
+    private StudentsRepository studentRepo;
 
     @GetMapping("/students/view")
     public String getAllStudents(Model model) {
@@ -54,37 +54,37 @@ public class StudentsController {
             System.out.println("Error studentname contained no characters");
             throw new Error("Error: name is undefined");
         }
-        System.out.println("Error studentname contained no characters");
 
-        studentRepo.save(new Students("name", "weight", "height", "hairColor", 0));
+        studentRepo.save(new Students(newName, newWeight, newHeight, newhairColor, newSize));
+
         response.setStatus(201);
         
         return "students/addForm";
     }
 
-    @PostMapping("/students/edit/{id}")
-    public String editStudent(@PathVariable Double id, @ModelAttribute Students updatedStudent) {
-        Students student = studentRepo.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid student id: " + id));
+    // @PostMapping("/students/edit/{id}")
+    // public String editStudent(@PathVariable Double id, @ModelAttribute Students updatedStudent) {
+    //     Students student = studentRepo.findById(id)
+    //             .orElseThrow(() -> new IllegalArgumentException("Invalid student id: " + id));
 
-        // Update attributes
-        student.setName(updatedStudent.getName());
-        student.setWeight(updatedStudent.getWeight());
-        student.setHeight(updatedStudent.getHeight());
-        student.sethairColor(updatedStudent.gethairColor());
-        student.setGpa(updatedStudent.getGpa());
+    //     // Update attributes
+    //     student.setName(updatedStudent.getName());
+    //     student.setWeight(updatedStudent.getWeight());
+    //     student.setHeight(updatedStudent.getHeight());
+    //     student.sethairColor(updatedStudent.gethairColor());
+    //     student.setGpa(updatedStudent.getGpa());
 
-        // Save the updated student to the database
-        studentRepo.save(student);
+    //     // Save the updated student to the database
+    //     studentRepo.save(student);
             
-        // Redirect to the showAll page after successful update
-        return "redirect:/students/showAll";
-    }
+    //     // Redirect to the showAll page after successful update
+    //     return "redirect:/students/showAll";
+    // }
 
-    @GetMapping("/students/delete")
-    public String deleteStudent(@PathVariable Double id) {
-        studentRepo.deleteById(id);
-        return "redirect:/students/showAll";
-    }
+    // @GetMapping("/students/delete")
+    // public String deleteStudent(@PathVariable Double id) {
+    //     studentRepo.deleteById(id);
+    //     return "redirect:/students/showAll";
+    // }
 
 }
