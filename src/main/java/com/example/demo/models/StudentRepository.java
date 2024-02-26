@@ -4,11 +4,11 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface StudentRepository extends JpaRepository<Student, Double>{
-    List<Student> findByName(String name);
-    List<Student> findByWeight(String weight);
-    List<Student> findByHeight(String height);
-    List<Student> findByhairColor(String hairColor);
-    List<Student> findBygpa(double gpa);
+public interface StudentRepository extends JpaRepository<Students, Double>{
+    List<Students> findByName(String name);
+    List<Students> findByWeight(String weight);
+    List<Students> findByHeight(String height);
+    List<Students> findByhairColor(String hairColor);
+    List<Students> findBygpa(double gpa);
 }
 

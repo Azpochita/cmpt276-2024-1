@@ -15,7 +15,7 @@ import java.util.*;
 import java.lang.*;
 import java.sql.ResultSet;
 
-import com.example.demo.models.Student;
+import com.example.demo.models.Students;
 
 import org.springframework.ui.Model;
 
@@ -36,7 +36,7 @@ public class StudentsController {
     @GetMapping("/students/view")
     public String getAllStudents(Model model) {
         System.out.println("Hello from all Student");
-        List<Student> students = studentRepo.findAll(); // db
+        List<Students> students = studentRepo.findAll(); // db
         model.addAttribute("us", students);
         return "students/showAll";
     }
@@ -56,15 +56,15 @@ public class StudentsController {
         }
         System.out.println("Error studentname contained no characters");
 
-        studentRepo.save(new Student("name", "weight", "height", "hairColor", 0));
+        studentRepo.save(new Students("name", "weight", "height", "hairColor", 0));
         response.setStatus(201);
         
         return "students/addForm";
     }
 
     @PostMapping("/students/edit/{id}")
-    public String editStudent(@PathVariable Double id, @ModelAttribute Student updatedStudent) {
-        Student student = studentRepo.findById(id)
+    public String editStudent(@PathVariable Double id, @ModelAttribute Students updatedStudent) {
+        Students student = studentRepo.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid student id: " + id));
 
         // Update attributes
