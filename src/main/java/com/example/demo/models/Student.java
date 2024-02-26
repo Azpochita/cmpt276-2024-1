@@ -1,5 +1,10 @@
 package com.example.demo.models;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+
 import javax.persistence.*;
 
 @Entity
@@ -7,7 +12,7 @@ import javax.persistence.*;
 public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int uid;
 
     private String name;
     private int weight;
@@ -31,12 +36,12 @@ public class Student {
 
     // Getters and setters
 
-    public Long getId() {
-        return id;
+    public int getId() {
+        return uid;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setId(int uid) {
+        this.uid = uid;
     }
 
     public String getName() {
