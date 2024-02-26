@@ -5,7 +5,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
-import com.example.demo.models.StudentsRepository;
+import com.example.demo.models.StudentRepository;
 
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -31,7 +31,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class StudentsController {
     
     @Autowired
-    private StudentsRepository studentRepo;
+    private StudentRepository studentRepo;
 
     @GetMapping("/students/view")
     public String getAllStudents(Model model) {
