@@ -43,20 +43,20 @@ public class StudentsController {
         String newHeight = newstudent.get("height");
         String newhairColor = newstudent.get("hairColor");
 
-        System.out.println("something?");
+        System.out.println("Fuck");
         int newSize = Integer.parseInt(newstudent.get("size"));
     
         if (newName.length() == 0) {
             System.out.println("Error studentname contained no characters");
             throw new Error("Error: name is undefined");
         }
-        System.out.println("something?");
+        System.out.println("this");
 
         studentRepo.save(new Students(newName, newWeight, newHeight, newhairColor, newSize));
-        System.out.println("something?");
+        System.out.println("shit");
 
         response.setStatus(201);
-        System.out.println("something?");
+        System.out.println("I wanna die");
     
         return "students/addForm";
     }

@@ -12,7 +12,7 @@ public class Students {
     private String weight;
     private String height;
     private String hairColor;
-    private double gpa;
+    private int gpa;
 
     public Students(String name, String weight, String height, String hairColor, int gpa) {
         this.name = name;
