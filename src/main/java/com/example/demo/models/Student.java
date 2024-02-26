@@ -10,7 +10,7 @@ public class Student {
     private int uid;
     private String name;
     private String password;
-    private int gpa;
+    private double gpa;
 
     public Student(String name, String password, double gpa) {
         this.name = name;

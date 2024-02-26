@@ -42,9 +42,9 @@ public class StudentsController {
         System.out.println("ADD user");
         String newName = newuser.get("name");
         String newhairColor = newuser.get("password");
-        double newGpa = Double.parseInt(newuser.get("size"));
+        double newGpa = Double.parseDouble(newuser.get("size"));
         
-        studentRepo.save(new Students(newName, newhairColor, newGpa));
+        studentRepo.save(new Student(newName, newhairColor, newGpa));
         response.setStatus(201);
         return "students/addedUser";
     }
