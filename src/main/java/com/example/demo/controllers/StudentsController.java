@@ -1,8 +1,5 @@
 package com.example.demo.controllers;
 
-import java.util.ArrayList;
-import java.util.List;
-
 // import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,17 +42,22 @@ public class StudentsController {
         String newWeight = newstudent.get("weight");
         String newHeight = newstudent.get("height");
         String newhairColor = newstudent.get("hairColor");
-        int newSize = Integer.parseInt(newstudent.get("size"));
 
+        System.out.println("something?");
+        int newSize = Integer.parseInt(newstudent.get("size"));
+    
         if (newName.length() == 0) {
             System.out.println("Error studentname contained no characters");
             throw new Error("Error: name is undefined");
         }
+        System.out.println("something?");
 
         studentRepo.save(new Students(newName, newWeight, newHeight, newhairColor, newSize));
+        System.out.println("something?");
 
         response.setStatus(201);
-        
+        System.out.println("something?");
+    
         return "students/addForm";
     }
 
