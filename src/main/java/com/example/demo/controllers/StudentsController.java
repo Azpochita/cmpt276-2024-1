@@ -8,8 +8,8 @@ import org.springframework.stereotype.Controller;
 import com.example.demo.models.Student;
 import com.example.demo.models.StudentRepository;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import java.util.*;
 
 import org.springframework.ui.Model;
