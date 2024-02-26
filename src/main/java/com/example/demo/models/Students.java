@@ -14,7 +14,7 @@ public class Students {
     private String hairColor;
     private double gpa;
 
-    public Students(String name, String weight, String height, String hairColor, double gpa) {
+    public Students(String name, String weight, String height, String hairColor, int gpa) {
         this.name = name;
         this.weight = weight;
         this.height = height;
@@ -54,11 +54,11 @@ public class Students {
         this.hairColor = hairColor;
     }
 
-    public double getGpa() {
+    public int getGpa() {
         return gpa;
     }
 
-    public void setGpa(double gpa) {
+    public void setGpa(int gpa) {
         this.gpa = gpa;
     }
 

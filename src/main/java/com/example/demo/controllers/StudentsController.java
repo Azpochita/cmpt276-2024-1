@@ -1,19 +1,18 @@
 package com.example.demo.controllers;
 
-import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.List;
+
+// import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import com.example.demo.models.StudentRepository;
 
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.*;
-import java.lang.*;
-import java.sql.ResultSet;
 
 import com.example.demo.models.Students;
 
@@ -23,8 +22,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
-
-
 
 
 @Controller
@@ -48,7 +45,7 @@ public class StudentsController {
         String newWeight = newstudent.get("weight");
         String newHeight = newstudent.get("height");
         String newhairColor = newstudent.get("hairColor");
-        double newSize = Double.parseDouble(newstudent.get("size"));
+        int newSize = Integer.parseInt(newstudent.get("size"));
 
         if (newName.length() == 0) {
             System.out.println("Error studentname contained no characters");
