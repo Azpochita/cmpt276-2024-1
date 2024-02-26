@@ -30,16 +30,16 @@ public class StudentsController {
     @Autowired
     private StudentRepository studentRepo;
 
-    @GetMapping("/users/view")
-    public String getAllUsers(Model model) {
+    @GetMapping("/students/view")
+    public String getAllStudents(Model model) {
         System.out.println("Hello from all users");
-        List<Student> users = studentRepo.findAll(); // db
-        model.addAttribute("us", users);
-        return "users/showAll";
+        List<Student> students = studentRepo.findAll(); // db
+        model.addAttribute("us", students);
+        return "students/showAll";
     }
     
-    @PostMapping("/users/add")
-    public String addUser(@RequestParam Map<String, String, String, String> newstudent, HttpServletResponse response) {
+    @PostMapping("/students/add")
+    public String addStudent(@RequestParam Map<String, String, String, String> newstudent, HttpServletResponse response) {
         System.out.println("ADD user");
         String newName = newstudent.get("name");
         String newWeight = newstudent.get("weight");
@@ -48,7 +48,7 @@ public class StudentsController {
         int newSize = Integer.parseInt(newstudent.get("size"));
         studentRepo.save(new Student(newName, newWeight, newHeight, newhairColor, newSize));
         response.setStatus(201);
-        return "users/addedUser";
+        return "students/addedUser";
     }
     
 }
