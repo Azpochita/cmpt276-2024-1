@@ -29,7 +29,7 @@ public class StudentsController {
     @Autowired
     private StudentRepository studentRepo;
 
-    @GetMapping("/student/view")
+    @GetMapping("/students/view")
     public String getAllStudents(Model model) {
         System.out.println("Hello from all users");
         List<Student> students = studentRepo.findAll(); // db
@@ -37,9 +37,9 @@ public class StudentsController {
         return "students/showAll";
     }
     
-    @PostMapping("/student/add")
+    @PostMapping("/students/add")
     public String addStudent(@RequestParam Map<String, String> newstudent, HttpServletResponse response) {
-        System.out.println("ADD user");
+        System.out.println("ADD student");
         String newName = newstudent.get("name");
         String newhairColor = newstudent.get("password");
         int newGpa = Integer.parseInteger(newstudent.get("size"));
@@ -48,9 +48,5 @@ public class StudentsController {
         response.setStatus(201);
         return "students/addedUser";
     }
-    // @GetMapping("/login")
-    // public String getLogin(Model model, HttpServletRequest request, HttpSession session) {
-    //     return new String();
-    // }
     
 }

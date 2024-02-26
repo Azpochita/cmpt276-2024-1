@@ -3,7 +3,7 @@ package com.example.demo.models;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "users")
+@Table(name = "students")
 public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,11 +34,11 @@ public class Student {
         this.hairColor = hairColor;
     }
 
-    public double getGpa() {
+    public int getGpa() {
         return gpa;
     }
 
-    public void setGpa(double gpa) {
+    public void setGpa(int gpa) {
         this.gpa = gpa;
     }
 
