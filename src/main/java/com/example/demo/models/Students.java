@@ -13,7 +13,8 @@ public class Students {
     private String height;
     private String hairColor;
     private int gpa;
-
+    public Students() {}
+    
     public Students(String name, String weight, String height, String hairColor, int gpa) {
         this.name = name;
         this.weight = weight;
