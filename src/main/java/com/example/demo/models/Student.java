@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "users")
-public class User {
+public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int uid;
@@ -12,7 +12,7 @@ public class User {
     private String password;
     private int age;
 
-    public User(String name, String password, int age) {
+    public Student(String name, String password, int age) {
         this.name = name;
         this.password = password;
         this.age = age;

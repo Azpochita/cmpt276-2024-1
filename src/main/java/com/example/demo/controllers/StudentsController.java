@@ -8,13 +8,13 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
-import com.example.demo.models.UserRepository;
+import com.example.demo.models.Student;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.*;
 
-import com.example.demo.models.User;
+import com.example.demo.models.Student;
 
 import org.springframework.ui.Model;
 
@@ -27,15 +27,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Controller
-public class UsersController {
+public class StudentsController {
     
     @Autowired
-    private UserRepository userRepo;
+    private StudentRepository userRepo;
 
     @GetMapping("/users/view")
     public String getAllUsers(Model model) {
         System.out.println("Hello from all users");
-        List<User> users = userRepo.findAll(); // db
+        List<Student> users = userRepo.findAll(); // db
         model.addAttribute("us", users);
         return "users/showAll";
     }
@@ -46,13 +46,9 @@ public class UsersController {
         String newName = newuser.get("name");
         String newPwd = newuser.get("password");
         int newSize = Integer.parseInt(newuser.get("size"));
-        userRepo.save(new User(newName,newPwd,newSize));
+        userRepo.save(new Student(newName,newPwd,newSize));
         response.setStatus(201);
         return "users/addedUser";
     }
-    // @GetMapping("/login")
-    // public String getLogin(Model model, HttpServletRequest request, HttpSession session) {
-    //     return new String();
-    // }
     
 }
