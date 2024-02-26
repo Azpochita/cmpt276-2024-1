@@ -10,9 +10,9 @@ public class Student {
     private int uid;
     private String name;
     private String hairColor;
-    private double gpa;
+    private int gpa;
 
-    public Student(String name, String hairColor, double gpa) {
+    public Student(String name, String hairColor, int gpa) {
         this.name = name;
         this.hairColor = hairColor;
         this.gpa = gpa;

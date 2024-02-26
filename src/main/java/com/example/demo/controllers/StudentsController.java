@@ -42,7 +42,7 @@ public class StudentsController {
         System.out.println("ADD student");
         String newName = newstudent.get("name");
         String newhairColor = newstudent.get("password");
-        int newGpa = Integer.parseInteger(newstudent.get("size"));
+        int newGpa = Integer.parseInt(newstudent.get("size"));
         
         studentRepo.save(new Student(newName, newhairColor, newGpa));
         response.setStatus(201);
