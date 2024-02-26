@@ -51,22 +51,24 @@ public class StudentController {
     public String addStudent(Map<String, String> newstudent, HttpServletResponse response) {
         System.out.println("ADD student");
         String newName = newstudent.get("name");
-        String newPwd = newstudent.get("password");
-        int newSize = Integer.parseInt(newstudent.get("size"));
+        String newWeight = newstudent.get("weight");
+        String newHeight = newstudent.get("height");
+        String newhairColor = newstudent.get("hairColor");
+        double newSize = Double.parseDouble(newstudent.get("size"));
 
         if (newName.length() == 0) {
             System.out.println("Error studentname contained no characters");
             throw new Error("Error: name is undefined");
         }
 
-        studentRepo.save(new Student("name", "password", "size", "hairColor", 0));
+        studentRepo.save(new Student("name", "weight", "height", "hairColor", 0));
         response.setStatus(201);
         
         return "students/addForm";
     }
 
-    @GetMapping("/students/edit/{id}")
-    public String showEditForm(@PathVariable Integer id, Model model) {
+    @GetMapping("/students/edit")
+    public String showEditForm(@PathVariable Double id, Model model) {
         Student student = studentRepo.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid student id: " + id));
 
@@ -74,8 +76,8 @@ public class StudentController {
         return "students/editForm";
     }
 
-    @PostMapping("/students/edit/{id}")
-    public String editStudent(@PathVariable Integer id, @ModelAttribute Student updatedStudent) {
+    @PostMapping("/students/edit")
+    public String editStudent(@PathVariable Double id, @ModelAttribute Student updatedStudent) {
         Student student = studentRepo.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid student id: " + id));
 
@@ -90,8 +92,8 @@ public class StudentController {
         return "redirect:/students/showAll";
     }
 
-    @GetMapping("/students/delete/{id}")
-    public String deleteStudent(@PathVariable Integer id) {
+    @GetMapping("/students/delete")
+    public String deleteStudent(@PathVariable Double id) {
         studentRepo.deleteById(id);
         return "redirect:/students/showAll";
     }
