@@ -61,7 +61,7 @@ public class StudentsController {
             throw new Error("Error: name is undefined");
         }
 
-        studentRepo.save(new Student("name", "weight", "height", "hairColor", "size"));
+        studentRepo.save(new Student("name", "weight", "height", "hairColor", 0));
         response.setStatus(201);
         
         return "students/addForm";
