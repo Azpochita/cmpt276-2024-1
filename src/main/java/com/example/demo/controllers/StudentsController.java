@@ -42,7 +42,7 @@ public class StudentsController {
     }
 
     @PostMapping("/students/add")
-    public String addStudent(Map<String, String> newstudent, HttpServletResponse response) {
+    public String addStudent(@RequestParam Map<String, String> newstudent, HttpServletResponse response) {
         System.out.println("ADD student");
         String newName = newstudent.get("name");
         String newWeight = newstudent.get("weight");
@@ -54,6 +54,7 @@ public class StudentsController {
             System.out.println("Error studentname contained no characters");
             throw new Error("Error: name is undefined");
         }
+        System.out.println("Error studentname contained no characters");
 
         studentRepo.save(new Student("name", "weight", "height", "hairColor", 0));
         response.setStatus(201);
