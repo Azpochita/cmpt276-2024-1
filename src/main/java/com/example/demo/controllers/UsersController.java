@@ -46,7 +46,7 @@ public class UsersController {
         String newName = newuser.get("name");
         String newPwd = newuser.get("password");
         int newSize = Integer.parseInt(newuser.get("size"));
-        userRepo.save(new Student(newName,newPwd,newSize));
+        userRepo.save(new Student(newName,newPwd,newSize, 10.5));
         response.setStatus(201);
         return "users/addedUser";
     }
