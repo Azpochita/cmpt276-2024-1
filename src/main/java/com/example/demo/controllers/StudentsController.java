@@ -27,7 +27,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Controller
-public class UsersController {
+public class StudentsController {
     
     @Autowired
     private StudentRepository userRepo;
