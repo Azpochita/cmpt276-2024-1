@@ -28,7 +28,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Controller
-public class StudentController {
+public class StudentsController {
     
     @Autowired
     private StudentRepository studentRepo;
@@ -61,7 +61,7 @@ public class StudentController {
             throw new Error("Error: name is undefined");
         }
 
-        studentRepo.save(new Student("name", "weight", "height", "hairColor", 0));
+        studentRepo.save(new Student("name", "weight", "height", "hairColor", "size"));
         response.setStatus(201);
         
         return "students/addForm";
@@ -90,7 +90,7 @@ public class StudentController {
 
         // Save the updated student to the database
         studentRepo.save(student);
-
+            
         // Redirect to the showAll page after successful update
         return "redirect:/students/showAll";
     }
