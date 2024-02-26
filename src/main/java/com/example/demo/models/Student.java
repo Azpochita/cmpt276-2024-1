@@ -11,9 +11,9 @@ public class Student {
     private String name;
     private String password;
     private int age;
-    private double gpa;
+    private int gpa;
 
-    public Student(String name, String password, int age, double gpa) {
+    public Student(String name, String password, int age, int gpa) {
         this.name = name;
         this.password = password;
         this.age = age;
@@ -40,11 +40,11 @@ public class Student {
         return age;
     }
 
-    public double getGpa() {
+    public int getGpa() {
         return gpa;
     }
 
-    public void setGpa(double gpa) {
+    public void setGpa(int gpa) {
         this.gpa = gpa;
     }
     public void setAge(int age) {
