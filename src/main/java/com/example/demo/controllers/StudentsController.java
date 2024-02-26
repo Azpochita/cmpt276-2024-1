@@ -30,19 +30,19 @@ public class StudentsController {
     private StudentRepository studentRepo;
 
     @GetMapping("/student/view")
-    public String getAllUsers(Model model) {
+    public String getAllStudents(Model model) {
         System.out.println("Hello from all users");
-        List<Student> users = studentRepo.findAll(); // db
-        model.addAttribute("us", users);
+        List<Student> students = studentRepo.findAll(); // db
+        model.addAttribute("us", students);
         return "students/showAll";
     }
     
     @PostMapping("/student/add")
-    public String addUser(@RequestParam Map<String, String> newuser, HttpServletResponse response) {
+    public String addStudent(@RequestParam Map<String, String> newstudent, HttpServletResponse response) {
         System.out.println("ADD user");
-        String newName = newuser.get("name");
-        String newhairColor = newuser.get("password");
-        double newGpa = Double.parseDouble(newuser.get("size"));
+        String newName = newstudent.get("name");
+        String newhairColor = newstudent.get("password");
+        int newGpa = Integer.parseInteger(newstudent.get("size"));
         
         studentRepo.save(new Student(newName, newhairColor, newGpa));
         response.setStatus(201);

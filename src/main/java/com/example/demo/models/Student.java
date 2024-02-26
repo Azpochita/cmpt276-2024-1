@@ -9,12 +9,12 @@ public class Student {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int uid;
     private String name;
-    private String password;
+    private String hairColor;
     private double gpa;
 
-    public Student(String name, String password, double gpa) {
+    public Student(String name, String hairColor, double gpa) {
         this.name = name;
-        this.password = password;
+        this.hairColor = hairColor;
         this.gpa = gpa;
     }
 
@@ -26,12 +26,12 @@ public class Student {
         this.name = name;
     }
 
-    public String getPassword() {
-        return password;
+    public String gethairColor() {
+        return hairColor;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void sethairColor(String hairColor) {
+        this.hairColor = hairColor;
     }
 
     public double getGpa() {
