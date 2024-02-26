@@ -67,7 +67,7 @@ public class StudentController {
         return "students/addForm";
     }
 
-    @GetMapping("/students/edit")
+    @GetMapping("/students/edit/{id}")
     public String showEditForm(@PathVariable Double id, Model model) {
         Student student = studentRepo.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid student id: " + id));
@@ -76,7 +76,7 @@ public class StudentController {
         return "students/editForm";
     }
 
-    @PostMapping("/students/edit")
+    @PostMapping("/students/edit/{id}")
     public String editStudent(@PathVariable Double id, @ModelAttribute Student updatedStudent) {
         Student student = studentRepo.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid student id: " + id));
@@ -88,7 +88,10 @@ public class StudentController {
         student.sethairColor(updatedStudent.gethairColor());
         student.setGpa(updatedStudent.getGpa());
 
+        // Save the updated student to the database
         studentRepo.save(student);
+
+        // Redirect to the showAll page after successful update
         return "redirect:/students/showAll";
     }
 
