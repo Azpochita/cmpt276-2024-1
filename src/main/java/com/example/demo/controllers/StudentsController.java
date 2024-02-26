@@ -42,8 +42,8 @@ public class StudentsController {
     public String addStudent(@RequestParam Map<String, String> newstudent, HttpServletResponse response) {
         System.out.println("ADD user");
         String newName = newstudent.get("name");
-        String newWeight = newstudent.get("weight");
-        String newHeight = newstudent.get("height");
+        int newWeight = Integer.parseInt(newstudent.get("Weight"));
+        int newHeight = Integer.parseInt(newstudent.get("Height"));
         String newhairColor = newstudent.get("hairColor");
         int newGpa = Integer.parseInt(newstudent.get("Gpa"));
         studentRepo.save(new Student(newName, newWeight, newHeight, newhairColor, newGpa));

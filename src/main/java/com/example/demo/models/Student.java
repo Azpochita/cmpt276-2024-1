@@ -1,21 +1,42 @@
 package com.example.demo.models;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "students")
 public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int uid;
-    private String name;
-    private String password;
-    private int age;
+    private Long id;
 
-    public Student(String name, String password, int age) {
+    private String name;
+    private int weight;
+    private int height;
+    private String hairColor;
+    private double gpa;
+
+    // Constructors, getters, and setters
+
+    public Student() {
+        // Default constructor required by JPA
+    }
+
+    public Student(String name, int weight, int height, String hairColor, double gpa) {
         this.name = name;
-        this.password = password;
-        this.age = age;
+        this.weight = weight;
+        this.height = height;
+        this.hairColor = hairColor;
+        this.gpa = gpa;
+    }
+
+    // Getters and setters
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -26,28 +47,35 @@ public class Student {
         this.name = name;
     }
 
-    public String getPassword() {
-        return password;
+    public int getWeight() {
+        return weight;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setWeight(int weight) {
+        this.weight = weight;
     }
 
-    public int getAge() {
-        return age;
+    public int getHeight() {
+        return height;
     }
 
-    public void setAge(int age) {
-        this.age = age;
+    public void setHeight(int height) {
+        this.height = height;
     }
 
-    public int getUid() {
-        return uid;
+    public String getHairColor() {
+        return hairColor;
     }
 
-    public void setUid(int uid) {
-        this.uid = uid;
+    public void setHairColor(String hairColor) {
+        this.hairColor = hairColor;
     }
-    
+
+    public double getGpa() {
+        return gpa;
+    }
+
+    public void setGpa(double gpa) {
+        this.gpa = gpa;
+    }
 }
