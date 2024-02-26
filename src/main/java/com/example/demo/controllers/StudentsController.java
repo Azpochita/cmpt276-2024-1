@@ -1,8 +1,5 @@
 package com.example.demo.controllers;
 
-import java.util.ArrayList;
-import java.util.List;
-
 // import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,27 +27,26 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class StudentsController {
     
     @Autowired
-    private StudentRepository userRepo;
+    private StudentRepository studentRepo;
 
-    @GetMapping("/users/view")
+    @GetMapping("/student/view")
     public String getAllUsers(Model model) {
         System.out.println("Hello from all users");
-        List<Student> users = userRepo.findAll(); // db
+        List<Student> users = studentRepo.findAll(); // db
         model.addAttribute("us", users);
-        return "users/showAll";
+        return "students/showAll";
     }
     
     @PostMapping("/student/add")
     public String addUser(@RequestParam Map<String, String> newuser, HttpServletResponse response) {
         System.out.println("ADD user");
         String newName = newuser.get("name");
-        String newPwd = newuser.get("password");
-        int newSize = Integer.parseInt(newuser.get("size"));
-        Student s = new Student(newName, newPwd, newSize, 10);
-        System.out.println("gpa: " + s.getGpa());
-        userRepo.save(s);
+        String newhairColor = newuser.get("password");
+        double newGpa = Double.parseInt(newuser.get("size"));
+        
+        studentRepo.save(new Students(newName, newhairColor, newGpa));
         response.setStatus(201);
-        return "users/addedUser";
+        return "students/addedUser";
     }
     // @GetMapping("/login")
     // public String getLogin(Model model, HttpServletRequest request, HttpSession session) {

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Show All Students</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <style>
+        .student-box {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin: 10px;
+            display: inline-block;
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="container-fluid">
+        <h1 class="text-center mt-5 mb-4">All Students</h1>
+
+        <div th:each="student : ${students}" class="student-box">
+            <h3 th:text="${student.name}"></h3>
+            <p th:text="'Hair Color: ' + ${student.hairColor}"></p>
+            <p th:text="'GPA: ' + ${student.gpa}"></p>
+
+            <a th:href="@{'/students/edit/' + ${student.id}}">Edit</a>
+            <a th:href="@{'/students/delete/' + ${student.id}}">Delete</a>
+        </div>
+    </main>
+
+</body>
+
+</html>
