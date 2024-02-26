@@ -8,6 +8,6 @@ public interface StudentRepository extends JpaRepository<Student, Integer>{
     List<Student> findByName(String name);
     List<Student> findByWeight(String weight);
     List<Student> findByHeight(String height);
-    List<Student> findByhairColor(String hairColor);
-    List<Student> findBygpa(double gpa);
+    List<Student> findByHairColor(String hairColor);
+    List<Student> findByGpa(double gpa);
 }

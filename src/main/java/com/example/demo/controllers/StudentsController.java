@@ -39,14 +39,14 @@ public class StudentsController {
     }
     
     @PostMapping("/students/add")
-    public String addStudent(@RequestParam Map<String, String, String, String> newstudent, HttpServletResponse response) {
+    public String addStudent(@RequestParam Map<String, String> newstudent, HttpServletResponse response) {
         System.out.println("ADD user");
         String newName = newstudent.get("name");
         String newWeight = newstudent.get("weight");
         String newHeight = newstudent.get("height");
         String newhairColor = newstudent.get("hairColor");
-        int newSize = Integer.parseInt(newstudent.get("size"));
-        studentRepo.save(new Student(newName, newWeight, newHeight, newhairColor, newSize));
+        int newGpa = Integer.parseInt(newstudent.get("Gpa"));
+        studentRepo.save(new Student(newName, newWeight, newHeight, newhairColor, newGpa));
         response.setStatus(201);
         return "students/addedUser";
     }
