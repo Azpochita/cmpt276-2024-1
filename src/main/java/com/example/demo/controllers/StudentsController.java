@@ -8,11 +8,9 @@ import org.springframework.stereotype.Controller;
 import com.example.demo.models.Student;
 import com.example.demo.models.StudentRepository;
 
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.*;
-
-import com.example.demo.models.Student;
 
 import org.springframework.ui.Model;
 
@@ -45,7 +43,7 @@ public class StudentsController {
         int newWeight = Integer.parseInt(newstudent.get("Weight"));
         int newHeight = Integer.parseInt(newstudent.get("Height"));
         String newhairColor = newstudent.get("hairColor");
-        double newGpa = Double.parseDouble(newstudent.get("Gpa"));
+        int newGpa = Integer.parseInt(newstudent.get("Gpa"));
         studentRepo.save(new Student(newName, newWeight, newHeight, newhairColor, newGpa));
         response.setStatus(201);
         return "students/addedUser";
