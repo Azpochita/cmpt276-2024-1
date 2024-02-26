@@ -10,14 +10,14 @@
     <table style="border: 1px;">
         <tr>
             <th>Name</th>
-            <th>hairColor</th>
-            <th>GPA</th>
+            <th>Password</th>
+            <th>Age</th>
     
         </tr>
         <tr th:each="user : ${usrs}">
             <td th:text="${user.name}"></td>
-            <td th:text="${user.hairColor}"></td>
-            <td th:text="${user.GPA}"></td>
+            <td th:text="${user.password}"></td>
+            <td th:text="${user.age}"></td>
        
         </tr>
     </table>

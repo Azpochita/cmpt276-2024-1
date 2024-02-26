@@ -5,6 +5,7 @@ package com.example.demo.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
+import com.example.demo.models.Student;
 import com.example.demo.models.StudentRepository;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -39,12 +40,13 @@ public class StudentsController {
     
     @PostMapping("/students/add")
     public String addStudent(@RequestParam Map<String, String> newstudent, HttpServletResponse response) {
-        System.out.println("ADD student");
+        System.out.println("ADD user");
         String newName = newstudent.get("name");
-        String newhairColor = newstudent.get("password");
-        int newGpa = Integer.parseInt(newstudent.get("size"));
-        
-        studentRepo.save(new Student(newName, newhairColor, newGpa));
+        int newWeight = Integer.parseInt(newstudent.get("Weight"));
+        int newHeight = Integer.parseInt(newstudent.get("Height"));
+        String newhairColor = newstudent.get("hairColor");
+        double newGpa = Double.parseDouble(newstudent.get("Gpa"));
+        studentRepo.save(new Student(newName, newWeight, newHeight, newhairColor, newGpa));
         response.setStatus(201);
         return "students/addedUser";
     }
