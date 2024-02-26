@@ -41,12 +41,6 @@ public class StudentsController {
         return "students/showAll";
     }
 
-    @GetMapping("/students/add")
-    public String showAddForm(Model model) {
-        model.addAttribute("student", new Student("name", "password", "size", "hairColor", 0));
-        return "students/addForm";
-    }
-
     @PostMapping("/students/add")
     public String addStudent(Map<String, String> newstudent, HttpServletResponse response) {
         System.out.println("ADD student");
@@ -65,15 +59,6 @@ public class StudentsController {
         response.setStatus(201);
         
         return "students/addForm";
-    }
-
-    @GetMapping("/students/edit/{id}")
-    public String showEditForm(@PathVariable Double id, Model model) {
-        Student student = studentRepo.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid student id: " + id));
-
-        model.addAttribute("student", student);
-        return "students/editForm";
     }
 
     @PostMapping("/students/edit/{id}")
